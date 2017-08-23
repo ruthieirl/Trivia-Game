@@ -1,0 +1,11 @@
+body {
+	/*background-image: url("../images/background.jpg");*/
+	background-color: beige;
+}
+
+.jumbotron {
+	margin-top: 60px;
+	background-color: #fff;
+	border: 2px solid skyblue;
+}
+
