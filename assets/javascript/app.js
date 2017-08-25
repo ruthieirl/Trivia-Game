@@ -10,7 +10,7 @@ $(document).ready(function() {
     {
       question: "What does C.R.E.A.M. stand for?",
       answer: "Cash Rules Everything Around Me",
-      choices: ["It was code for drug paraphernalia", "Cake icing mixed with cocaine", "Cash Rules Everything Around Me", "Cosmic Ray Energetics and Mass"]
+      choices: ["It was code for drug paraphernalia", "Curry Rice, Edibles, And Money", "Cash Rules Everything Around Me", "Cosmic Ray Energetics and Mass"]
     },
     {
       question: "The majority of WuTang members are from what New York City borough?",
@@ -32,6 +32,8 @@ $(document).ready(function() {
 //  Variable that will hold our interval ID when we execute the "run" function
   var intervalId;
 
+  var audio = new Audio("http://a990.phobos.apple.com/us/r30/Music/60/bb/0d/mzm.sxzcaadl.aac.p.m4a");
+
   // Loops through questions and prints
   for (var i = 0; i < questions.length; i++) {
     // Creates question section
@@ -44,7 +46,8 @@ $(document).ready(function() {
     var question = $("<label>");
 
     // Give that section it's question
-    question.text(questions[i].question);
+    //question.text(questions[i].question);
+    question.html("<p class='labelTxt'>" + questions[i].question + "</p>");
 
     // Loop through possible choices for each question and print them out (using j because i is already being used)
     for (var j = 0; j < questions[i].choices.length; j++) {
@@ -58,7 +61,8 @@ $(document).ready(function() {
       // Give them styles
       choiceText.addClass("form-check-label");
       // Give it text
-      choiceText.text(questions[i].choices[j])
+      //choiceText.text(questions[i].choices[j])
+      choiceText.html("<p>" + questions[i].choices[j] + "</p>");
 
       // Create actual radio button
       var choiceInput = $("<input>");
@@ -90,7 +94,17 @@ $(document).ready(function() {
 
   // Bind event handler for all elements with a radio type (see jQuery selectors)
   $("body").on("change", ":radio", function() {
-    console.log($(this).data("answer"))
+    var userChoice = $(this).data("answer");
+    console.log(userChoice)
+    
+  //if the userChoice equals the index of the "answer" in the questions' choices array
+  //right++;
+  //if the userChoice is not equal to the index of the "answer" in the questions' choices array
+  //wrong++;  
+    console.log(questions[0].answer);
+    console.log(questions[1].answer);
+    console.log(questions[2].answer);
+    console.log(questions[3].answer);
   })
 
 
@@ -105,14 +119,29 @@ function run() {
       number--;
       //  Show the number in the #timeLeft tag.
       $("#timeLeft").html("<h4>Time Remaining: " + number + " seconds</h4>");
+
+      //$("element").click(function() {
+      //  if ($("#radio_button").is (":checked"));
+      //  right++;
+      //})
       //  Once number hits zero...
       if (number === 0) {
         //  ...run the stop function.
         stop();
+        $(".form-element").hide();
+        audio.play();
+
         //  Alert the user that time is up and how many they got right/wrong.
-        $("#results").html("<h3>Time's Up!</h3>" + "<br>" +
-                         "<p style='margn-top: 5px;''>You got " + right + " answers right.</p>" +
-                         "<p>You got " + wrong + " answers wrong.</p>");
+        $("#results").html("<h2>Time's Up!</h2>" + "<br>" +
+                         "<p class='labelTxt'>You got " + right + " answers right.</p>" +
+                         "<p class='labelTxt'>You got " + wrong + " answers wrong.</p>" +
+                         "<div style='text-align:left;'>" +
+                         "<p>The WuTang Clan recorded their first single, Protect Ya Neck, for $300. <br> They allegedly paid for the session in quarters.</p>" +
+                         "<p>C.R.E.A.M. stands for Cash Rules Everything Around Me.</p>" +
+                         "<p>Six of the nine members of the WuTang Clan are from Staten Island. <br> The remaining three members are from Brooklyn.</p>" +
+                         "<p>Ghostface Killah is the first to rhyme on the group's 1993 debut album, <br> Enter the WuTang's first track, Bring Da Ruckus.</p>" +
+                         "<img class='img-fluid' src='assets/images/group1.jpg'>" +
+                         "</div>");
       }
     }
     //  The stop function
