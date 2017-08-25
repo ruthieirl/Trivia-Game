@@ -1,11 +1,17 @@
 body {
-	/*background-image: url("../images/background.jpg");*/
-	background-color: beige;
+	background-image: url("../images/background.jpg");
 }
 
 .jumbotron {
 	margin-top: 60px;
 	background-color: #fff;
-	border: 2px solid skyblue;
+	border: 5px solid #ea1;
 }
 
+/*.form-check {
+	display:inline;
+}*/
+
+.form-group {
+	width: 100%;
+}
