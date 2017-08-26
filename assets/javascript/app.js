@@ -1,6 +1,8 @@
 //Make sure that nothing happens until page is comepletel loaded.
 $(document).ready(function() {
 
+  //Create question objects in an array
+  //Each questions has an attribute of question, answer, choices
   var questions = [
     {
       question: "How much did it cost for WuTang to record their single 'Protect Ya Neck'?",
@@ -24,18 +26,22 @@ $(document).ready(function() {
     }
   ]
 
+  //Creat containers for right and wrong answer tallies
   var right = 0;
   var wrong = 0;
 
+  //Create the timer number
   var number = 30;
 
-//  Variable that will hold our interval ID when we execute the "run" function
+  //Variable that will hold our interval ID when we execute the "run" function
   var intervalId;
 
+  //Audio URL
   var audio = new Audio("http://a990.phobos.apple.com/us/r30/Music/60/bb/0d/mzm.sxzcaadl.aac.p.m4a");
 
   // Loops through questions and prints
   for (var i = 0; i < questions.length; i++) {
+    
     // Creates question section
     var printQuestion = $("<div>");
 
@@ -84,6 +90,7 @@ $(document).ready(function() {
       question.append(choice);
 
     }
+    
     // Append entire question to div
     printQuestion.append(question)
 
@@ -97,10 +104,13 @@ $(document).ready(function() {
     var userChoice = $(this).data("answer");
     console.log(userChoice)
     
-  //if the userChoice equals the index of the "answer" in the questions' choices array
-  //right++;
-  //if the userChoice is not equal to the index of the "answer" in the questions' choices array
-  //wrong++;  
+  //if the userChoice equals the index of the "answer" in that questions' choices array
+  //if (userChoice == indexOf() {
+    //right++;
+  //} else {
+    //wrong++;
+  //}
+  //if the userChoice is not equal to the index of the "answer" in that questions' choices array 
     console.log(questions[0].answer);
     console.log(questions[1].answer);
     console.log(questions[2].answer);
@@ -108,22 +118,18 @@ $(document).ready(function() {
   })
 
 
-//  The run function sets an interval that runs the decrement function once a second.
+//The run function sets an interval that runs the decrement function once a second.
 function run() {
     intervalId = setInterval(decrement, 1000);
 }
   
-  //  The decrement function.
+  //The decrement function.
     function decrement() {
-      //  Decrease number by one.
+      //Decrease number by one.
       number--;
-      //  Show the number in the #timeLeft tag.
+      //Show the number in the #timeLeft tag.
       $("#timeLeft").html("<h4>Time Remaining: " + number + " seconds</h4>");
 
-      //$("element").click(function() {
-      //  if ($("#radio_button").is (":checked"));
-      //  right++;
-      //})
       //  Once number hits zero...
       if (number === 0) {
         //  ...run the stop function.
@@ -136,10 +142,10 @@ function run() {
                          "<p class='labelTxt'>You got " + right + " answers right.</p>" +
                          "<p class='labelTxt'>You got " + wrong + " answers wrong.</p>" +
                          "<div style='text-align:left;'>" +
-                         "<p>The WuTang Clan recorded their first single, Protect Ya Neck, for $300. <br> They allegedly paid for the session in quarters.</p>" +
-                         "<p>C.R.E.A.M. stands for Cash Rules Everything Around Me.</p>" +
-                         "<p>Six of the nine members of the WuTang Clan are from Staten Island. <br> The remaining three members are from Brooklyn.</p>" +
-                         "<p>Ghostface Killah is the first to rhyme on the group's 1993 debut album, <br> Enter the WuTang's first track, Bring Da Ruckus.</p>" +
+                         "<p>The WuTang Clan recorded their first single, Protect Ya Neck, for <b>$300</b>. <br> They allegedly paid for the session in quarters.</p>" +
+                         "<p>C.R.E.A.M. stands for <b>Cash Rules Everything Around Me</b>.</p>" +
+                         "<p>Six of the nine members of the WuTang Clan are from <b>Staten Island</b>. <br> The remaining three members are from Brooklyn.</p>" +
+                         "<p><b>Ghostface Killah</b> is the first to rhyme on the group's 1993 debut album, <br> Enter the WuTang's first track, Bring Da Ruckus.</p>" +
                          "<img class='img-fluid' src='assets/images/group1.jpg'>" +
                          "</div>");
       }
